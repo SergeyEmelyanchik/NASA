@@ -22,15 +22,14 @@ import ru.geekbrains.nasa.ui.adapter.MarsPhotosRVAdapter
 
 class MarsPhotosFragment() : MvpAppCompatFragment(), MarsPhotosView, BackButtonListener {
 
-    var KEY_RECYCLER_PHOTOS = "net.svishch.android.outerspace.ui.fragments.Recycler"
+    var KEY_RECYCLER_PHOTOS = "ru.geekbrains.nasa.ui.fragments.Recycler"
     var KEY_RECYCLER_IS_FAVORITES =
-        "net.svishch.android.outerspace.ui.fragments.MarsPhotosFragment.Favorites"
+        "ru.geekbrains.nasa.ui.fragments.MarsPhotosFragment.Favorites"
     var isFavorites = false
 
     companion object {
         fun newInstance() = MarsPhotosFragment()
     }
-
     var spanCount = 2 // В два ряда
 
     val presenter: MarsPhotosPresenter by moxyPresenter {
@@ -66,9 +65,9 @@ class MarsPhotosFragment() : MvpAppCompatFragment(), MarsPhotosView, BackButtonL
         rv_mars_photos.adapter = adapter
     }
 
-    fun setActionBar() {
+    fun setActionBar(){
 
-        if (activity is AppCompatActivity) {
+        if(activity is AppCompatActivity){
             actionBar = (activity as AppCompatActivity).supportActionBar!!
         }
 
