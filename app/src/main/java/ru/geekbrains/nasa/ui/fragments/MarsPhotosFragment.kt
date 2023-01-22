@@ -30,6 +30,7 @@ class MarsPhotosFragment() : MvpAppCompatFragment(), MarsPhotosView, BackButtonL
     companion object {
         fun newInstance() = MarsPhotosFragment()
     }
+
     var spanCount = 2 // В два ряда
 
     val presenter: MarsPhotosPresenter by moxyPresenter {
@@ -42,7 +43,7 @@ class MarsPhotosFragment() : MvpAppCompatFragment(), MarsPhotosView, BackButtonL
     }
 
     var adapter: MarsPhotosRVAdapter? = null
-    private lateinit var actionBar: ActionBar
+    private var actionBar: ActionBar? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,13 +57,21 @@ class MarsPhotosFragment() : MvpAppCompatFragment(), MarsPhotosView, BackButtonL
         setHasOptionsMenu(true)
 
         isFavorites = presenter.getBundle().getBoolean(KEY_RECYCLER_IS_FAVORITES)
-        actionBar = (activity as AppCompatActivity).supportActionBar!!
+        setActionBar()
         updateActionBar()
 
 
         rv_mars_photos.layoutManager = GridLayoutManager(context, spanCount)
         adapter = MarsPhotosRVAdapter(presenter.marsPhotosListPresenter, GlideImageLoader())
         rv_mars_photos.adapter = adapter
+    }
+
+    fun setActionBar() {
+
+        if (activity is AppCompatActivity) {
+            actionBar = (activity as AppCompatActivity).supportActionBar!!
+        }
+
     }
 
     override fun onPause() {
